@@ -4,9 +4,6 @@ import random
 
 
 client_name = "NULL"
-a_global = 5
-q_global = 37
-x = random.randrange(0, q_global)
 
 
 def generate_key(a, x, q):
@@ -31,9 +28,13 @@ def client():
     client_socket.connect(('127.0.0.1', 5555))
 
     threading.Thread(target=receive_messages, args=(client_socket,)).start()
-
+    a = 5
+    q = 37
+    print(f"Generating random element from q = {q} and a = {a}...")
+    x = random.randrange(0, q)
+    key = generate_key(a, q)
     while True:
-        message = input("Enter message: ")
+        print(f"Result: ")
         client_socket.send(message.encode('utf-8'))
 
 
