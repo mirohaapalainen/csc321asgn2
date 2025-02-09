@@ -69,6 +69,7 @@ def server():
 
 
 def client(name):
+    global client_socket
     private_key = random.randint(1, q - 1)
     public_key = power(a, private_key, q)
 
@@ -95,7 +96,7 @@ def client(name):
     else:
         message = "Hi Alice!"
 
-    ciphertext = AESCipher(truncated_k).encrypt(message).decode('utf-8')
+    ciphertext = AESCipher(str(truncated_k)).encrypt(message).decode('utf-8')
 
     client_socket.send(str(ciphertext).encode())
     other_message = str(client_socket.recv(1024).decode())
